@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2015-04-24T20:05:12 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laudo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="949ddbe7-bae3-4102-bd05-2ef3e3d00fe7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="titulo" class="java.lang.String"/>
+	<parameter name="nome" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[Select c.`nome` ncand, s.`laudo`, e.`idetapa` idetp, e.`nome` netapa, DATE_FORMAT( s.`data_i` , '%d/%c/%Y as %H:%i' ) AS `inicio`, DATE_FORMAT( s.`data_f` , '%d/%c/%Y as %H:%i' ) AS `fim`,  Case When s.`indicado` = '-1' THEN 'Em avaliação' WHEN s.`indicado` = '0' THEN 'Não' WHEN s.`indicado` = '1' THEN 'Sim' END AS situacao  From rh_teste.`selecao` s, rh_teste.`candidato` c, rh_teste.`etapa` e Where (s.`active`='1') and (s.`candidato`=c.`idcandidato`) and (s.`etapa`=e.`idetapa`) Order by s.`candidato`, s.`etapa`]]>
+	</queryString>
+	<field name="laudo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ncand" class="java.lang.String"/>
+	<field name="netapa" class="java.lang.String"/>
+	<field name="inicio" class="java.lang.String"/>
+	<field name="fim" class="java.lang.String"/>
+	<field name="situacao" class="java.lang.String"/>
+	<field name="idetp" class="java.lang.Integer"/>
+	<group name="candidato">
+		<groupExpression><![CDATA[$F{ncand}]]></groupExpression>
+		<groupHeader>
+			<band height="30" splitType="Stretch">
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<printWhenExpression><![CDATA[$P{nome}!=null]]></printWhenExpression>
+				<componentElement>
+					<reportElement x="0" y="1" width="554" height="25" isRemoveLineWhenBlank="true" uuid="bf95bd73-422e-4742-828a-da704a5d3dad">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="RetainShape" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA["<b><em>"+$F{ncand}+"</em></b><span style='color:#FFFFFF'>____</span>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="380a5e8b-7e33-484f-96b7-ff691458e940">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="etapa">
+		<groupExpression><![CDATA[$F{netapa}]]></groupExpression>
+		<groupHeader>
+			<band height="50" splitType="Stretch">
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<componentElement>
+					<reportElement x="0" y="0" width="194" height="20" isRemoveLineWhenBlank="true" uuid="2ca35e8f-0fe5-4ec1-9587-933f9371561d">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA["<b>Etapa:</b>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<componentElement>
+					<reportElement x="194" y="0" width="140" height="20" isRemoveLineWhenBlank="true" uuid="c627ab20-6141-499a-8c92-647d8dcd0dc9">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA["<b>Inicio:</b>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<componentElement>
+					<reportElement x="334" y="0" width="140" height="20" isRemoveLineWhenBlank="true" uuid="f69a4c58-a789-4f44-9603-c272fdee85ed">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA["<b>Fim:</b>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<componentElement>
+					<reportElement x="474" y="0" width="80" height="20" isRemoveLineWhenBlank="true" uuid="43f1a7c2-289f-4020-ad6b-66f68cfac116">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA["<b>Indicado?</b>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<componentElement>
+					<reportElement x="0" y="25" width="194" height="20" isRemoveLineWhenBlank="true" uuid="0b148d77-2d2c-46d9-a85d-70aa9b9de5b6">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA[$F{idetp}+" "+$F{netapa}+"<span style='color:#FFFFFF'>____</span>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<componentElement>
+					<reportElement x="334" y="25" width="140" height="20" isRemoveLineWhenBlank="true" uuid="df335a6b-e833-4e12-b6d9-201612b1a4d8">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA[$F{fim}+"<span style='color:#FFFFFF'>____</span>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<componentElement>
+					<reportElement x="194" y="25" width="140" height="20" isRemoveLineWhenBlank="true" uuid="cc8d5a50-3967-42e2-b32c-8511d9d40200">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA[$F{inicio}+"<span style='color:#FFFFFF'>____</span>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<componentElement>
+					<reportElement x="474" y="25" width="80" height="20" isRemoveLineWhenBlank="true" uuid="7bb28625-752c-4512-9722-139000640435">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA[$F{situacao}+"<span style='color:#FFFFFF'>____</span>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<line>
+					<reportElement x="0" y="49" width="555" height="1" uuid="b1bc7169-7142-4091-9354-d105a3a12887">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="a77eb64d-32e4-42a0-9c3a-c7c98c65a1ec">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{titulo}!=null]]></printWhenExpression>
+			<componentElement>
+				<reportElement x="120" y="0" width="434" height="45" isRemoveLineWhenBlank="true" uuid="173a96c1-4b60-48e1-8de8-12665da7f9f4">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="RetainShape" horizontalAlign="Left" verticalAlign="Middle">
+					<hc:htmlContentExpression><![CDATA["<b>"+$P{titulo}+"</b>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+			<image>
+				<reportElement x="0" y="0" width="120" height="45" uuid="5f7d6164-1e3f-4826-811c-75f720485bd6">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					<property name="local_mesure_unitheight" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="554" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="44b5bf2b-7a07-4410-b630-a683a0f8c9f5">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{laudo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
